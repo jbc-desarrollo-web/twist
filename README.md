@@ -72,31 +72,6 @@ celda = VACIA | pieza ;
 pieza = TIPO , GIRO , COLOR ;
 ```
 
-## Guion para la demo de la defensa
-
-Dos casos válidos y uno inválido, para pegar en un Playground:
-
-```smalltalk
-"Válido 1: el juego completo con sus tres niveles (Ctrl+D)"
-TwTableroMorph abrir.
-
-"Válido 2: un nivel propio de dos colores (Ctrl+D)"
-TwTableroMorph abrirJuego: (TwJuego conNiveles: #('L1a L2a E2b
-E0a E0a E0b')).
-
-"Inválido: la X no pertenece al lenguaje. Seleccionar y Print it (Ctrl+P): muestra el mensaje de error"
-[ TwJuego conNiveles: #('E1a X3a') ] on: TwErrorDeNivel do: [ :error | error messageText ].
-```
-
-Otros errores para mostrar (con el mismo `on:do:` y Print it):
-
-| Texto | Qué responde |
-|---|---|
-| `R1 L2a` | Se esperaba un color (a, b o c) y se encontró 'L'. |
-| `E0a E3a` | El nivel no está resuelto tal como está escrito: quedan 2 conexiones sueltas. ... |
-| `E1a E3a` y abajo `E1a` | La fila 2 del tablero tiene otra cantidad de casillas que la primera. ... |
-| `. .` | El nivel necesita al menos una pieza que se pueda girar. |
-
 ## Estructura del código
 
 | Paquete | Clases | Responsabilidad |
@@ -115,9 +90,3 @@ juego tocarFila: 1 columna: 1.
 juego tablero cantidadDeConexionesSueltas.
 ```
 
-## Subirlo a GitHub con Iceberg
-
-1. Crear el repositorio vacío en GitHub.
-2. En Pharo: Browse → Iceberg → **New repository** → **Clone from github.com** (o crear uno local y agregarle el remoto).
-3. Con el repositorio abierto, **Add package** y agregar los cuatro paquetes `Twist-*`.
-4. **Commit** y **Push**. Iceberg guarda el código en formato Tonel (un archivo por clase).
